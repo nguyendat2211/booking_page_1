@@ -6,7 +6,7 @@ import '../model/Items.dart';
 import 'other_service_widget.dart';
 
 class DetailsService extends StatelessWidget {
-  //Đây là để thử git
+  //Đây là để thử git nhánh khác
   final Items item;
   List<Items> itemsList;
 
