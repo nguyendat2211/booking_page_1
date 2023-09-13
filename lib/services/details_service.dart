@@ -16,6 +16,7 @@ class DetailsService extends StatelessWidget {
     return itemsList.where((suggestion) => suggestion != item).toList();
   }
 
+  //check it
   @override
   Widget build(BuildContext context) {
     final currencyFormat =
