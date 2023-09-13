@@ -9,8 +9,7 @@ class DetailsService extends StatelessWidget {
   final Items item;
   List<Items> itemsList;
 
-  //check pass 2 a
-
+  //check pass 2 by Nguyen Dat oke man
   DetailsService({super.key, required this.item, required this.itemsList});
 
   List<Items> getSuggestions() {
