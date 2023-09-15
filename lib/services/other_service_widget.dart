@@ -1,13 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../services_mobx/service_store.dart';
-import 'details_service.dart';
 import '../model/Items.dart';
-import '../model/Services.dart';
 import 'package:intl/intl.dart';
-
-final itemStore = ServiceStore();
 
 class OtherService extends StatefulWidget {
   late int selectedId;
@@ -24,15 +21,15 @@ class OtherServiceState extends State<OtherService> {
   final currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: 'vnđ');
   String? formattedDiscount;
   late final Items item;
-
   late int selectedId;
+  final itemStore = Modular.get<ServiceStore>();
 
   OtherServiceState(this.selectedId);
 
   void hideItem(int selectedId) {
-    itemStore.itemList.forEach((item) {
+    for (var item in itemStore.itemList) {
       item.isVisible = item.id != selectedId;
-    });
+    }
   }
 
   @override
@@ -40,9 +37,7 @@ class OtherServiceState extends State<OtherService> {
     super.initState();
     _scrollController = ScrollController();
     _scrollController.addListener(_loadMoreItems);
-    // itemStore.loadDataOther(selectedId);
     itemStore.loadData();
-    print(selectedId);
     hideItem(selectedId);
   }
 
@@ -87,13 +82,8 @@ class OtherServiceState extends State<OtherService> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => DetailsService(
-                                          item: itemStore.itemList[index],
-                                          itemsList: itemStore.itemList,
-                                        )));
+                            Modular.to.pushNamed('/detail',
+                                arguments: items);
                           },
                           child: Container(
                             decoration: BoxDecoration(

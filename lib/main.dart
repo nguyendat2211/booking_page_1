@@ -1,5 +1,5 @@
-
 import 'package:booking_page_1/services/list_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -14,11 +14,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ModularApp(
+    return ModularApp(
       module: ServiceModular(),
       child: const MaterialApp(
+        initialRoute: '/',
         home: ListServices(),
-      ),
+      ).modular(),
     );
   }
 }

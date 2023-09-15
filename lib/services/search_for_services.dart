@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -129,9 +128,7 @@ class MySearchDelegate extends SearchDelegate {
                         context,
                         MaterialPageRoute(
                             builder: (context) => DetailsService(
-                                  item: limitedSuggestions[index],
-                                  itemsList: suggestionList,
-                                )));
+                                item: limitedSuggestions[index])));
                   },
                 ),
               );

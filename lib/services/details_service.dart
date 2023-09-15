@@ -1,19 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 import '../model/Items.dart';
+import '../services_mobx/service_store.dart';
 import 'other_service_widget.dart';
 
 class DetailsService extends StatelessWidget {
-  //Đây là để thử git nhánh check chứ không phải nhánh khác
   final Items item;
-  List<Items> itemsList;
+  final itemStore = Modular.get<ServiceStore>();
 
-  //check pass 2 by Nguyen Dat oke man
-  DetailsService({super.key, required this.item, required this.itemsList});
+  DetailsService({super.key, required this.item});
 
   List<Items> getSuggestions() {
-    return itemsList.where((suggestion) => suggestion != item).toList();
+    return itemStore.itemList
+        .where((suggestion) => suggestion != item)
+        .toList();
   }
 
   //check it
@@ -228,7 +230,9 @@ class DetailsService extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(20), // Add margin for spacing
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                print("Hello");
+              },
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12.0), // Rounded border

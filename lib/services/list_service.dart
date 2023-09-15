@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:booking_page_1/services/search_for_services.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import '../services_mobx/service_store.dart';
-import 'details_service.dart';
 import 'package:intl/intl.dart';
 
 // final itemStore = ServiceStore();
@@ -18,7 +16,6 @@ class ListServices extends StatefulWidget {
 }
 
 class ListServicesState extends State<ListServices> {
-
   int pageIndex = 0;
   late ScrollController _scrollController;
   final currencyFormat = NumberFormat.currency(locale: 'vi_VN', symbol: 'vnđ');
@@ -116,16 +113,9 @@ class ListServicesState extends State<ListServices> {
 
                                     return GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                DetailsService(
-                                              item: itemStore.itemList[index],
-                                              itemsList: itemStore.itemList,
-                                            ),
-                                          ),
-                                        );
+                                        print("Hello");
+                                        Modular.to.pushNamed('/detail',
+                                            arguments: item);
                                       },
                                       child: Container(
                                         margin: const EdgeInsets.all(8),
