@@ -5,10 +5,10 @@ import '../model/Items.dart';
 import 'details_service.dart';
 
 class MySearchDelegate extends SearchDelegate {
-  final List<Items> products;
+  final List<Items> serviceList;
   final int maxList;
 
-  MySearchDelegate(this.products, {this.maxList = 5});
+  MySearchDelegate(this.serviceList, {this.maxList = 18});
 
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -46,7 +46,7 @@ class MySearchDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final List<Items> suggestionList = products
+    final List<Items> suggestionList = serviceList
         .where((product) =>
             product.name.toLowerCase().contains(query.toLowerCase()))
         .toList();
