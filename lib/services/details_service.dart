@@ -18,7 +18,7 @@ class DetailsService extends StatelessWidget {
         .toList();
   }
 
-  //check it
+  //nhánh chính
   @override
   Widget build(BuildContext context) {
     final currencyFormat =
