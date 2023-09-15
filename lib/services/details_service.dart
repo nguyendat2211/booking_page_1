@@ -125,91 +125,99 @@ class DetailsService extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Padding(
-                padding: const EdgeInsets.all(10),
-                // Adjust the padding as needed
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      child: const Text(
-                        "Chi tiết gói",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        "Lưu ý",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Column(
+                  padding: const EdgeInsets.all(10),
+                  // Adjust the padding as needed
+                  child: SingleChildScrollView(
+                    child: Column(
                       children: [
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Text(
-                                    "• "
-                                    " Nhịn đói trước khi lấy mẫu ít nhất 6-8 tiếng, chỉ được uống nước lọc",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Text(
-                                      "• "
-                                      " Không ăn sáng, không uống nước ngọt, nước hoa quả, sữa, rượu... để đảm bảo kết quả chính xác",
-                                      style: TextStyle(fontSize: 16)),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Text(
-                                      "• "
-                                      " Với trường hợp đã chuẩn bị sẵn, trước khi siêu âm ổ bụng, bệnh nhân nên nhịn ăn ít nhất 6-8 giờ. Nên siêu âm vào buổi sáng",
-                                      style: TextStyle(fontSize: 16)),
-                                ),
-                              ],
-                            ))
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: const Text(
+                            "Chi tiết gói",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 8),
+                          alignment: Alignment.topLeft,
+                          child: const Text(
+                            "Lưu ý",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Column(
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "• "
+                                        " Nhịn đói trước khi lấy mẫu ít nhất 6-8 tiếng, chỉ được uống nước lọc",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Text(
+                                          "• "
+                                          " Không ăn sáng, không uống nước ngọt, nước hoa quả, sữa, rượu... để đảm bảo kết quả chính xác",
+                                          style: TextStyle(fontSize: 16)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Text(
+                                          "• "
+                                          " Với trường hợp đã chuẩn bị sẵn, trước khi siêu âm ổ bụng, bệnh nhân nên nhịn ăn ít nhất 6-8 giờ. Nên siêu âm vào buổi sáng",
+                                          style: TextStyle(fontSize: 16)),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.all(5.0),
+                                      child: Text(
+                                          "• "
+                                          " Với trường hợp đã chuẩn bị sẵn, trước khi siêu âm ổ bụng, bệnh nhân nên nhịn ăn ít nhất 6-8 giờ. Nên siêu âm vào buổi sáng",
+                                          style: TextStyle(fontSize: 16)),
+                                    ),
+                                  ],
+                                ))
+                          ],
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 8),
+                          alignment: Alignment.topLeft,
+                          child: const Text(
+                            "Hướng dẫn sử dụng dịch vụ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: const EdgeInsets.only(top: 5),
+                          alignment: Alignment.topLeft,
+                          child: const Text(
+                            "Xem tại đây !",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.blueAccent,
+                                decoration: TextDecoration.underline),
+                          ),
+                        ),
                       ],
                     ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 8),
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        "Hướng dẫn sử dụng dịch vụ",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 5),
-                      alignment: Alignment.topLeft,
-                      child: const Text(
-                        "Xem tại đây !",
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.blueAccent,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                  )),
             ),
           ),
           SizedBox(
