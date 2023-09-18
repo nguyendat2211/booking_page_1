@@ -199,9 +199,20 @@ class RelativesState extends State<RelativesPage> {
         ),
         const Expanded(child: CalendarBooking()),
         Container(
-          margin: const EdgeInsets.only(bottom: 30),
+          margin: const EdgeInsets.only(bottom: 60),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                print('Họ và tên: $fullName');
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Vui lòng chọn giới tính.'),
+                  ),
+                );
+              }
+            },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0), // Rounded border
@@ -210,7 +221,7 @@ class RelativesState extends State<RelativesPage> {
             child: const Padding(
               padding: EdgeInsets.all(15),
               child: Text(
-                "Đặt lịch",
+                "Tiếp tục",
                 style: TextStyle(fontSize: 16),
               ),
             ),

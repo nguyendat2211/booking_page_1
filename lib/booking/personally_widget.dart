@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'calendar_widget.dart';
 
-class FirstScreen extends StatelessWidget {
-  const FirstScreen({super.key});
+class FormScreen extends StatelessWidget {
+  const FormScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,7 @@ class BookingForMe extends State<PersonallyPage> {
   String cmnd = '';
   String bhyt = '';
   String selectedGender = '';
+  bool isGenderSelected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +51,15 @@ class BookingForMe extends State<PersonallyPage> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Họ và tên không được để trống';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    fullName = value!;
+                  },
                 ),
                 // NGÀY SINH
                 const SizedBox(height: 15),
@@ -85,6 +95,15 @@ class BookingForMe extends State<PersonallyPage> {
                       icon: const Icon(Icons.calendar_month_outlined),
                     ),
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Ngày sinh không được để trống';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    birthday = value!;
+                  },
                 ),
                 // GIỚI TÍNH
                 const SizedBox(height: 15),
@@ -104,6 +123,7 @@ class BookingForMe extends State<PersonallyPage> {
                             onChanged: (value) {
                               setState(() {
                                 selectedGender = value as String;
+                                isGenderSelected = true; // Đã chọn giới tính
                               });
                             },
                           ),
@@ -119,6 +139,7 @@ class BookingForMe extends State<PersonallyPage> {
                             onChanged: (value) {
                               setState(() {
                                 selectedGender = value as String;
+                                isGenderSelected = true; // Đã chọn giới tính
                               });
                             },
                           ),
@@ -145,6 +166,15 @@ class BookingForMe extends State<PersonallyPage> {
                     ),
                   ),
                   keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Số điện thoại không được để trống';
+                    }
+                    return null;
+                  },
+                  onSaved: (value) {
+                    phoneNumber = value!;
+                  },
                 ),
                 // SỐ CCCD
                 const SizedBox(height: 15),
@@ -191,11 +221,22 @@ class BookingForMe extends State<PersonallyPage> {
             ),
           ),
         ),
-        Expanded(child: CalendarBooking()),
+        const Expanded(child: CalendarBooking()),
         Container(
-          margin: const EdgeInsets.only(bottom: 30),
+          margin: const EdgeInsets.only(bottom: 60),
           child: ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                print('Họ và tên: $fullName');
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Vui lòng chọn giới tính.'),
+                  ),
+                );
+              }
+            },
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0), // Rounded border
@@ -204,7 +245,7 @@ class BookingForMe extends State<PersonallyPage> {
             child: const Padding(
               padding: EdgeInsets.all(15),
               child: Text(
-                "Đặt lịch",
+                "Tiếp tục",
                 style: TextStyle(fontSize: 16),
               ),
             ),
