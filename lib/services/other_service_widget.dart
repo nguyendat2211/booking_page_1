@@ -82,8 +82,7 @@ class OtherServiceState extends State<OtherService> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Modular.to.pushNamed('/detail',
-                                arguments: items);
+                            Modular.to.pushNamed('/detail', arguments: items);
                           },
                           child: Container(
                             decoration: BoxDecoration(
