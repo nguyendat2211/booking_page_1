@@ -16,6 +16,8 @@ class CalendarState extends State<CalendarBooking> {
   List<String> timesOfDay = [];
   int selectedDay = -1;
   int selectedHour = -1;
+  String? selectedDate;
+  String? selectedTime;
 
   @override
   void initState() {
@@ -69,7 +71,7 @@ class CalendarState extends State<CalendarBooking> {
         padding: const EdgeInsets.all(5.0),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 60,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal, // Thiết lập vuốt ngang
@@ -80,8 +82,15 @@ class CalendarState extends State<CalendarBooking> {
                     onTap: () {
                       setState(() {
                         // Kiểm tra xem có ngày nào được chọn trước đó không
-                        selectedDay =
-                            isSelected ? -1 : index; // Đảo trạng thái chọn
+                        selectedDay = isSelected ? -1 : index;
+                        if (!isSelected) {
+                          // Lấy ngày tháng đã chọn khi người dùng chọn
+                          selectedDate = datesOfMonth[index];
+                        } else {
+                          selectedDate =
+                              null; // Bỏ chọn ngày tháng nếu người dùng bỏ chọn
+                        } // Đảo trạng thái chọn
+                        print(selectedDate.toString());
                       });
                     },
                     child: Container(
@@ -119,34 +128,40 @@ class CalendarState extends State<CalendarBooking> {
                 },
               ),
             ),
-            Container(
+            SizedBox(
               height: 60,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: timesOfDay.length,
                 itemBuilder: (BuildContext context, int index) {
-                  final isSelected = selectedHour == index;
+                  final time = timesOfDay[index];
+                  final isSelected = selectedTime == time;
+
                   return GestureDetector(
                     onTap: () {
                       setState(() {
-                        // Kiểm tra xem có ngày nào được chọn trước đó không
-                        selectedHour =
-                            isSelected ? -1 : index; // Đảo trạng thái chọn
+                        if (isSelected) {
+                          selectedTime =
+                              null; // Bỏ chọn nếu đã được chọn trước đó
+                        } else {
+                          selectedTime =
+                              time; // Chọn nếu chưa được chọn trước đó
+                        }
+                        print(selectedTime); // In ra giá trị đã chọn hoặc null
                       });
                     },
                     child: Container(
                       width: 120,
                       child: Card(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Đặt bán kính bo tròn
+                          borderRadius: BorderRadius.circular(10.0),
                         ),
                         color: isSelected ? Colors.blue : Colors.white,
                         elevation: 5.0,
                         margin: const EdgeInsets.all(5.0),
                         child: Center(
                           child: Text(
-                            timesOfDay[index],
+                            time,
                             style: TextStyle(
                               fontSize: 16.0,
                               color: isSelected ? Colors.white : Colors.black,
@@ -158,8 +173,7 @@ class CalendarState extends State<CalendarBooking> {
                   );
                 },
               ),
-            ),
-
+            )
           ],
         ),
       ),

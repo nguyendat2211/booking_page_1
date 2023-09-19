@@ -19,100 +19,115 @@ class _BookingPage extends State<BookingPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this); // Number of tabs
+    _tabController.addListener(_handleTabChange);
+  }
+
+  void _handleTabChange() {
+    // Đây là nơi bạn có thể log ra tên của tab đang được chọn
+    final selectedTabIndex = _tabController.index;
+    final tabs = ['Cá nhân', 'Người thân'];
+    final selectedTabName = tabs[selectedTabIndex];
+    print('Tab đang được chọn: $selectedTabName');
   }
 
   @override
   void dispose() {
-    _tabController.dispose(); // Dispose of the TabController when not needed
+    _tabController.removeListener(
+        _handleTabChange); // Loại bỏ listener khi không cần thiết
+    _tabController.dispose();
     super.dispose();
   }
 
-  void _submitForm() {
-    // Thực hiện các tác vụ sau khi biểu mẫu hợp lệ
-    print('Họ và tên: ');
-  }
+  // ... Các phần khác của mã của bạn ...
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: CupertinoButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(
-              CupertinoIcons.back,
-              color: Colors.blue,
-            ),
-          ),
-          title: const Text(
-            "Thông tin lịch đặt khám",
-            style: TextStyle(
-              color: Colors.blue,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(1.0), // Đặt chiều cao của gạch dưới
-            child: Container(
-              color: Colors.blue, // Màu của gạch dưới
-              height: 1.0, // Độ dài của gạch dưới
-            ),
+      appBar: AppBar(
+        leading: CupertinoButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Icon(
+            CupertinoIcons.back,
+            color: Colors.blue,
           ),
         ),
-        body: SingleChildScrollView(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TabBar(
-                    isScrollable: false,
-                    controller: _tabController,
-                    indicator: const BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(50))),
-                    unselectedLabelColor: Colors.blue,
-                    tabs: const [
-                      SizedBox(
-                        width: 180,
-                        child: Tab(
-                          child: Text('Cá nhân',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  fontFamily: 'Arial')),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 180,
-                        child: Tab(
-                          child: Text('Người thân',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 16,
-                                  fontFamily: 'Arial')),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  child: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: _tabController,
-                    children: const [
-                      FormScreen(),
-                      SecondScreen(),
-                    ],
-                  ),
-                ),
-
-              ],
-            ),
+        title: const Text(
+          "Thông tin lịch đặt khám",
+          style: TextStyle(
+            color: Colors.blue,
           ),
-        ));
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0.0,
+        bottom: PreferredSize(
+          preferredSize:
+              const Size.fromHeight(1.0), // Đặt chiều cao của gạch dưới
+          child: Container(
+            color: Colors.blue, // Màu của gạch dưới
+            height: 1.0, // Độ dài của gạch dưới
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TabBar(
+                  controller: _tabController,
+                  indicator: const BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                  unselectedLabelColor: Colors.blue,
+                  tabs: const [
+                    SizedBox(
+                      width: 180,
+                      child: Tab(
+                        child: Text(
+                          'Cá nhân',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            fontFamily: 'Arial',
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 180,
+                      child: Tab(
+                        child: Text(
+                          'Người thân',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                            fontFamily: 'Arial',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: TabBarView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: _tabController,
+                  children: const [
+                    FormScreen(),
+                    SecondScreen(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
