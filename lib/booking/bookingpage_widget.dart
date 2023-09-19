@@ -63,7 +63,7 @@ class _BookingPage extends State<BookingPage>
         ),
         body: SingleChildScrollView(
           child: SizedBox(
-            height: 850,
+            height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
                 Padding(
@@ -103,12 +103,13 @@ class _BookingPage extends State<BookingPage>
                   child: TabBarView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: _tabController,
-                    children:const[
+                    children: const [
                       FormScreen(),
                       SecondScreen(),
                     ],
                   ),
                 ),
+
               ],
             ),
           ),
